@@ -1,0 +1,588 @@
+{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Mazer Admin Dashboard</title>
+
+    <link
+      rel="shortcut icon"
+      href="{% static 'compiled/svg/favicon.svg' %}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="shortcut icon"
+      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAiCAYAAADRcLDBAAAEs2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS41LjAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgZXhpZjpQaXhlbFhEaW1lbnNpb249IjMzIgogICBleGlmOlBpeGVsWURpbWVuc2lvbj0iMzQiCiAgIGV4aWY6Q29sb3JTcGFjZT0iMSIKICAgdGlmZjpJbWFnZVdpZHRoPSIzMyIKICAgdGlmZjpJbWFnZUxlbmd0aD0iMzQiCiAgIHRpZmY6UmVzb2x1dGlvblVuaXQ9IjIiCiAgIHRpZmY6WFJlc29sdXRpb249Ijk2LjAiCiAgIHRpZmY6WVJlc29sdXRpb249Ijk2LjAiCiAgIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiCiAgIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIKICAgeG1wOk1vZGlmeURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiCiAgIHhtcDpNZXRhZGF0YURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJwcm9kdWNlZCIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWZmaW5pdHkgRGVzaWduZXIgMS4xMC4xIgogICAgICBzdEV2dDp3aGVuPSIyMDIyLTAzLTMxVDEwOjUwOjIzKzAyOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cjw/eHBhY2tldCBlbmQ9InIiPz5V57uAAAABgmlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kc8rRFEUxz9maORHo1hYKC9hISNGTWwsRn4VFmOUX5uZZ36oeTOv954kW2WrKLHxa8FfwFZZK0WkZClrYoOe87ypmWTO7dzzud97z+nec8ETzaiaWd4NWtYyIiNhZWZ2TvE946WZSjqoj6mmPjE1HKWkfdxR5sSbgFOr9Ll/rXoxYapQVik8oOqGJTwqPL5i6Q5vCzeo6dii8KlwpyEXFL519LjLLw6nXP5y2IhGBsFTJ6ykijhexGra0ITl5bRqmWU1fx/nJTWJ7PSUxBbxJkwijBBGYYwhBgnRQ7/MIQIE6ZIVJfK7f/MnyUmuKrPOKgZLpEhj0SnqslRPSEyKnpCRYdXp/9++msneoFu9JgwVT7b91ga+LfjetO3PQ9v+PgLvI1xkC/m5A+h7F32zoLXug38dzi4LWnwHzjeg8UGPGbFfySvuSSbh9QRqZ6H+Gqrm3Z7l9zm+h+iafNUV7O5Bu5z3L/wAdthn7QIme0YAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAJTSURBVFiF7Zi9axRBGIefEw2IdxFBRQsLWUTBaywSK4ubdSGVIY1Y6HZql8ZKCGIqwX/AYLmCgVQKfiDn7jZeEQMWfsSAHAiKqPiB5mIgELWYOW5vzc3O7niHhT/YZvY37/swM/vOzJbIqVq9uQ04CYwCI8AhYAlYAB4Dc7HnrOSJWcoJcBS4ARzQ2F4BZ2LPmTeNuykHwEWgkQGAet9QfiMZjUSt3hwD7psGTWgs9pwH1hC1enMYeA7sKwDxBqjGnvNdZzKZjqmCAKh+U1kmEwi3IEBbIsugnY5avTkEtIAtFhBrQCX2nLVehqyRqFoCAAwBh3WGLAhbgCRIYYinwLolwLqKUwwi9pxV4KUlxKKKUwxC6ZElRCPLYAJxGfhSEOCz6m8HEXvOB2CyIMSk6m8HoXQTmMkJcA2YNTHm3congOvATo3tE3A29pxbpnFzQSiQPcB55IFmFNgFfEQeahaAGZMpsIJIAZWAHcDX2HN+2cT6r39GxmvC9aPNwH5gO1BOPFuBVWAZue0vA9+A12EgjPadnhCuH1WAE8ivYAQ4ohKaagV4gvxi5oG7YSA2vApsCOH60WngKrA3R9IsvQUuhIGY00K4flQG7gHH/mLytB4C42EgfrQb0mV7us8AAMeBS8mGNMR4nwHamtBB7B4QRNdaS0M8GxDEog7iyoAguvJ0QYSBuAOcAt71Kfl7wA8DcTvZ2KtOlJEr+ByyQtqqhTyHTIeB+ONeqi3brh+VgIN0fohUgWGggizZFTplu12yW8iy/YLOGWMpDMTPXnl+Az9vj2HERYqPAAAAAElFTkSuQmCC"
+      type="image/png"
+    />
+
+    <link rel="stylesheet" href="{% static 'compiled/css/app.css' %}" />
+    <link rel="stylesheet" href="{% static 'compiled/css/app-dark.css'%}" />
+    <link rel="stylesheet" href="{% static 'compiled/css/iconly.css'%}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css' %}"
+    />
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6">
+          <h1 class="mb-4">Point of Sale</h1>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <h3 class="mb-4" id="dateTime"></h3>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="toggleDarkMode()"
+          >
+            <i id="themeIcon" class="fas fa-sun"></i>
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-8">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for product in products %}
+              <tr>
+                <td>{{product.id}}</td>
+                <td width="30%">
+                  <img
+                    width="60%"
+                    height="60%"
+                    src="{{ product.image.url }}"
+                    alt="{{ product.name }}"
+                  />
+                </td>
+                <td>{{ product.name }}</td>
+                <td>IDR {{ product.price }}</td>
+                <td>
+                  <input
+                    type="number"
+                    value="1"
+                    min="1"
+                    class="form-control quantity-input"
+                  />
+                </td>
+                <td>
+                  <button
+                    class="btn btn-success btn-sm"
+                    onclick="addToCart({{ product.id }}, {{ product.quantity }})"
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    class="btn btn-primary btn-sm"
+                    onclick="updateToCart({{ product.id }}, {{ product.quantity }})"
+                  >
+                    Update
+                  </button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-4">
+          <h2>Point of Sale</h2>
+          <ul id="cart" class="list-group"></ul>
+          <p class="total-amount fw-bold fs-5">
+            Total: IDR <span id="total">0</span>
+          </p>
+          <button class="btn btn-danger mt-3" onclick="removeAllCart()">
+            Remove Cart
+          </button>
+
+          <button
+            type="button"
+            id="payNowButton"
+            class="btn btn-primary mt-3"
+            data-bs-toggle="modal"
+            data-bs-target="#paymentModal"
+          >
+            Bayar Sekarang
+          </button>
+        </div>
+      </div>
+      <div
+        class="modal fade text-left"
+        id="paymentModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="paymentModalLabel"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="paymentModalLabel">
+                Payment Details
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <i data-feather="x"></i>
+              </button>
+            </div>
+            <form id="paymentForm">
+              <div class="modal-body">
+                <p>Total Amount: $<span id="paymentTotal">0</span></p>
+
+                <div class="row mb-3">
+                  <div class="col-4">
+                    <input
+                      type="hidden"
+                      id="paymentTotalInput"
+                      name="paymentTotal"
+                      value="0"
+                    />
+                    <input
+                      type="hidden"
+                      id="product_id"
+                      name="product_id"
+                      value="0"
+                    />
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="paymentMethod"
+                        id="paymentMethod"
+                        value="mastercard"
+                        checked
+                      />
+                      <label class="form-check-label" for="mastercard"
+                        >Mastercard</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="paymentMethod"
+                        id="visa"
+                        value="visa"
+                      />
+                      <label class="form-check-label" for="visa">Visa</label>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="paymentMethod"
+                        id="amex"
+                        value="amex"
+                      />
+                      <label class="form-check-label" for="amex"
+                        >American Express</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="cardNumber">Card Number:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cardNumber"
+                    placeholder="Enter card number"
+                    maxlength="16"
+                  />
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="expirationDate">Expiration Date:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="expirationDate"
+                      placeholder="MM/YYYY"
+                      maxlength="5"
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="cvv">CVV:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="cvv"
+                      placeholder="CVV"
+                      maxlength="5"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-light-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  <i class="bx bx-x d-block d-sm-none"></i>
+                  <span class="d-none d-sm-block">Close</span>
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary ms-1"
+                  data-bs-dismiss="modal"
+                >
+                  <i class="bx bx-check d-block d-sm-none"></i>
+                  <span class="d-none d-sm-block">Pay Now</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const BASE_URL = 'http://localhost:8000/cart';
+
+      function addToCart(productId, initialQuantity) {
+        const quantity =
+          parseInt(document.querySelector('.quantity-input').value) ||
+          initialQuantity ||
+          1;
+
+        const formData = new FormData();
+        formData.append('user', '{{ request.user.id }}');
+        formData.append('product', productId);
+        formData.append('quantity', quantity);
+
+        fetch("{% url 'user-cart-create' %}", {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+          },
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Item added to cart:', data);
+            updateCartDisplay();
+          })
+          .catch((error) => {
+            console.error('Error adding item to cart:', error);
+          });
+      }
+
+      function updateToCart(cartItemId, newQuantity) {
+        const formData = new FormData();
+        formData.append('quantity', newQuantity);
+
+        fetch(`${BASE_URL}/update-quantity/${cartItemId}/`, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+          },
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Item updated in cart:', data);
+
+            updateCartDisplay();
+          })
+          .catch((error) => {
+            console.error('Error updating item in cart:', error);
+          });
+      }
+
+      function removeFromCart(id) {
+        fetch(`${BASE_URL}/delete/${id}/`, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              console.log('Item removed from cart');
+              updateCartDisplay();
+            } else {
+              throw new Error('Error removing item from cart');
+            }
+          })
+          .catch((error) => {
+            console.error('Error removing item from cart:', error);
+          });
+      }
+      let selectedItemQuantity = 1;
+
+      function updateCartDisplay() {
+        fetch(`${BASE_URL}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const cartElement = document.getElementById('cart');
+            cartElement.innerHTML = '';
+
+            let total = 0;
+            data.forEach((item) => {
+              const product_id = (document.getElementById('product_id').value =
+                item.product.id);
+
+              const listItem = document.createElement('li');
+              listItem.textContent = `${item.product.name} - Quantity: ${
+                item.quantity
+              } - $${item.product.price * item.quantity}`;
+              listItem.setAttribute('data-productid', item.product.id);
+              listItem.setAttribute('data-itemid', item.id);
+              listItem.classList.add('list-group-item');
+
+              // Create delete button
+              const deleteButton = document.createElement('button');
+              deleteButton.textContent = 'Delete';
+              deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
+              listItem.appendChild(deleteButton);
+
+              // Add event listener to delete button
+              deleteButton.addEventListener('click', function (event) {
+                event.stopPropagation();
+                const itemId =
+                  event.currentTarget.parentElement.getAttribute('data-itemid');
+                console.log('Deleting Item ID:', itemId);
+                removeFromCart(itemId);
+              });
+
+              cartElement.appendChild(listItem);
+              total += item.product.price * item.quantity;
+            });
+
+            document.getElementById('total').textContent = total;
+            const paymentTotalSpan = document.getElementById('paymentTotal');
+            paymentTotalSpan.textContent = total;
+
+            const paymentTotalInput =
+              document.getElementById('paymentTotalInput');
+            paymentTotalInput.value = total;
+
+            cartElement.classList.add('list-group');
+          })
+          .catch((error) => {
+            console.error('Error fetching cart data:', error);
+          });
+      }
+
+      function removeAllCart() {
+        fetch(`${BASE_URL}/remove-all-cart/`, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('All user carts removed:', data);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error('Error removing all user carts:', error);
+          });
+      }
+
+      updateCartDisplay();
+
+      document
+        .getElementById('paymentForm')
+        .addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          let user = '{{request.user.id}}';
+          const paymentTotal =
+            document.getElementById('paymentTotalInput').value;
+          const cardNumber = document.getElementById('cardNumber').value;
+          const paymentMethod = document.getElementById('paymentMethod').value;
+          const expirationDate =
+            document.getElementById('expirationDate').value;
+          const cvv = document.getElementById('cvv').value;
+          const product_id = document.getElementById('product_id').value;
+
+          console.log('product_id', product_id);
+
+          if (
+            !paymentTotal ||
+            !cardNumber ||
+            !paymentMethod ||
+            !expirationDate ||
+            !cvv ||
+            !product_id
+          ) {
+            alert('Please fill in all fields.');
+          } else {
+            // Create the payment data
+            const formData = new FormData();
+            formData.append('user', user);
+            formData.append('cartNumber', cardNumber);
+            formData.append('expirationDate', expirationDate);
+            formData.append('paymentMethod', paymentMethod);
+            formData.append('cvv', cvv);
+            formData.append('amount', paymentTotal);
+
+            fetch('/payment/create/', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+              },
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log('Ini data payment:', data['id']);
+                createOrder(
+                  data['id'],
+                  user,
+                  product_id,
+                  paymentTotal,
+                  selectedItemQuantity
+                );
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+                alert('There was an error while creating payment.');
+              });
+          }
+        });
+
+      function createOrder(
+        payment_id,
+        user,
+        product_id,
+        paymentTotal,
+        selectedItemQuantity
+      ) {
+        console.log('payment_id', payment_id);
+        console.log('user', user);
+        console.log('product_id', product_id);
+        console.log('price', paymentTotal);
+        console.log('quantity', selectedItemQuantity);
+
+        const formDataOrder = new FormData();
+        formDataOrder.append('payment_id', payment_id);
+        formDataOrder.append('user_id', user);
+        formDataOrder.append('product_id', product_id);
+        formDataOrder.append('price', paymentTotal);
+        formDataOrder.append('quantity', selectedItemQuantity);
+
+        console.log('ini formData order:', formDataOrder);
+
+        fetch('/order/create/', {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+          },
+          body: formDataOrder,
+        })
+          .then((response) => {
+            if (response.ok) {
+              removeAllCart();
+              return response.json();
+            } else {
+              throw new Error('Failed to create order');
+            }
+          })
+          .then((data) => {
+            console.log('Order created:', data);
+          })
+          .catch((error) => {
+            console.error('Error creating order:', error);
+          });
+      }
+    </script>
+    <script>
+      const body = document.body;
+      const themeIcon = document.getElementById('themeIcon');
+
+      function toggleDarkMode() {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+          localStorage.setItem('theme', 'dark');
+          document.documentElement.setAttribute('data-bs-theme', 'dark');
+          themeIcon.classList.remove('fa-sun');
+          themeIcon.classList.add('fa-moon');
+        } else {
+          localStorage.setItem('theme', 'light');
+          document.documentElement.setAttribute('data-bs-theme', 'light');
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+        }
+      }
+
+      const theme = localStorage.getItem('theme');
+      if (theme) {
+        body.classList.add(theme);
+        document.documentElement.setAttribute('data-bs-theme', theme);
+        if (theme === 'dark') {
+          themeIcon.classList.remove('fa-sun');
+          themeIcon.classList.add('fa-moon');
+        } else {
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+        }
+      }
+    </script>
+    <script>
+      function updateTime() {
+        const now = new Date();
+        const options = {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+          hour12: true,
+        };
+        const dateTime = now.toLocaleString('id-ID', options);
+        const userName = '{{ request.user.name }}'; // Menggunakan sintaks Django untuk mendapatkan nama pengguna
+
+        document.getElementById(
+          'dateTime'
+        ).textContent = `Kasir: ${userName} | ${dateTime}`;
+      }
+
+      setInterval(updateTime, 1000);
+      updateTime();
+    </script>
+
+    <script src="{% static 'static/js/components/dark.js' %}"></script>
+    <script src="{% static 'compiled/js/app.js' %}"></script>
+  </body>
+</html>
